@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tools on Gert's blog</title><link>https://gertalot.com/tags/tools/</link><description>Recent content in Tools on Gert's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 27 Oct 2025 04:43:05 +0000</lastBuildDate><atom:link href="https://gertalot.com/tags/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>small useful git tricks</title><link>https://gertalot.com/posts/small-useful-git-tricks/</link><pubDate>Mon, 27 Oct 2025 04:43:05 +0000</pubDate><guid>https://gertalot.com/posts/small-useful-git-tricks/</guid><description>&lt;p&gt;Here&amp;rsquo;s a couple of &lt;code&gt;git&lt;/code&gt; aliases I use all the time. It gives you a quick and clear overview of your branches and
+commits. It can even watch for changes in realtime and show you any changes.&lt;/p&gt;
+&lt;p&gt;&lt;img src="git-log.png" alt="git log screenshot"&gt;&lt;/p&gt;
+&lt;h3 id="a-better-git-log"&gt;A better git log&lt;/h3&gt;
+&lt;p&gt;Add this to your &lt;code&gt;.gitconfig&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;[alias]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;tree&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;log --graph --decorate --all --format=&amp;#39;%C(auto)%h%d %Creset%s %C(dim)(%an)%Creset&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Run &lt;code&gt;git tree&lt;/code&gt; and you get a compact view of your commit history with branches, colored hashes, commit messages, and authors. The &lt;code&gt;--all&lt;/code&gt; flag shows all branches, not just the current one.&lt;/p&gt;</description></item></channel></rss>

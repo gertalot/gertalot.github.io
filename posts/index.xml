@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Gert's blog</title><link>https://gertalot.com/posts/</link><description>Recent content in Posts on Gert's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 27 Oct 2025 04:43:05 +0000</lastBuildDate><atom:link href="https://gertalot.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>small useful git tricks</title><link>https://gertalot.com/posts/small-useful-git-tricks/</link><pubDate>Mon, 27 Oct 2025 04:43:05 +0000</pubDate><guid>https://gertalot.com/posts/small-useful-git-tricks/</guid><description>&lt;p&gt;Here&amp;rsquo;s a couple of &lt;code&gt;git&lt;/code&gt; aliases I use all the time. It gives you a quick and clear overview of your branches and
 commits. It can even watch for changes in realtime and show you any changes.&lt;/p&gt;
-&lt;p&gt;&lt;img src="git-log.png" alt="git log screenshot"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://gertalot.com/posts/small-useful-git-tricks/git-log.png" alt="git log screenshot"&gt;&lt;/p&gt;
 &lt;h3 id="a-better-git-log"&gt;A better git log&lt;/h3&gt;
 &lt;p&gt;Add this to your &lt;code&gt;.gitconfig&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;

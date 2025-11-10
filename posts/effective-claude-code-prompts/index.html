@@ -1,0 +1,243 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en-us lang=en-us><head><script defer language=javascript type=text/javascript src=/js/bundle.min.d451ff92e80abc2a828eb9bb262e4db374bd4e954642f9245c54eec84bf690f3.js></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=/favicon.png><title itemprop=name>Meanwhile… - Effective Claude Code prompts</title><meta property="og:title" content="Meanwhile… - Effective Claude Code prompts"><meta name=twitter:title content="Meanwhile… - Effective Claude Code prompts"><meta itemprop=name content="Meanwhile… - Effective Claude Code prompts"><meta name=application-name content="Meanwhile… - Effective Claude Code prompts"><meta property="og:site_name" content="Gert's blog"><meta name=description content="A few techniques I use to get Claude Code to follow instructions a bit more reliably."><meta itemprop=description content="A few techniques I use to get Claude Code to follow instructions a bit more reliably."><meta property="og:description" content="A few techniques I use to get Claude Code to follow instructions a bit more reliably."><meta name=twitter:description content="A few techniques I use to get Claude Code to follow instructions a bit more reliably."><base href=https://gertalot.com/posts/effective-claude-code-prompts/><link rel=canonical href=https://gertalot.com/posts/effective-claude-code-prompts/ itemprop=url><meta name=url content="https://gertalot.com/posts/effective-claude-code-prompts/"><meta name=twitter:url content="https://gertalot.com/posts/effective-claude-code-prompts/"><meta property="og:url" content="https://gertalot.com/posts/effective-claude-code-prompts/"><meta property="og:updated_time" content="2025-11-10T10:24:53Z"><link rel=sitemap type=application/xml title=Sitemap href=https://gertalot.com/sitemap.xml><meta name=robots content="index,follow"><meta name=googlebot content="index,follow"><meta property="fb:admins" content><meta name=apple-mobile-web-app-title content="Gert's blog"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=generator content="Hugo 0.152.2"><link type=text/css rel=stylesheet href=/css/bundle.min.14e19ebce5899d4e862204eab85dca9fb3f8357ea89b52d3f545cdc6d8dd9384.css><style>body{--sidebar-bg-color:#202020;--sidebar-img-border-color:#515151;--sidebar-p-color:#909090;--sidebar-h1-color:#FFF;--sidebar-a-color:#FFF;--sidebar-socials-color:#FFF;--text-color:#222;--bkg-color:#FAF9F6;--post-title-color:#303030;--list-color:#5a5a5a;--link-color:#268bd2;--date-color:#515151;--table-border-color:#E5E5E5;--table-stripe-color:#F9F9F9;--code-color:#000;--code-background-color:#E5E5E5;--code-block-color:#fff;--code-block-background-color:#272822;--moon-sun-color:#FFF;--moon-sun-background-color:#515151}body.dark-theme{--text-color:#eee;--bkg-color:#121212;--post-title-color:#DBE2E9;--list-color:#9d9d9d;--link-color:#268bd2;--date-color:#9a9a9a;--table-border-color:#515151;--table-stripe-color:#202020;--code-color:#fff;--code-background-color:#515151;--code-block-color:#fff;--code-block-background-color:#272822}body{background-color:var(--bkg-color)}</style></head><body class=dark-theme><div class=wrapper><aside class=sidebar><div class="container sidebar-sticky"><div class=light-dark align=right><button class=btn-light-dark title="Toggle light/dark mode">
+<svg class="moon" width="1em" height="1em" viewBox="0 0 16 16"><path fill="currentColor" d="M6 .278a.768.768.0 01.08.858 7.208 7.208.0 00-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527.0 1.04-.055 1.533-.16a.787.787.0 01.81.316.733.733.0 01-.031.893A8.349 8.349.0 018.344 16C3.734 16 0 12.286.0 7.71.0 4.266 2.114 1.312 5.124.06A.752.752.0 016 .278z"/></svg>
+<svg class="sun" width="1em" height="1em" viewBox="0 0 16 16"><path fill="currentColor" d="M8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.5.5.0 01.5.5v2a.5.5.0 01-1 0v-2A.5.5.0 018 0zm0 13a.5.5.0 01.5.5v2a.5.5.0 01-1 0v-2A.5.5.0 018 13zm8-5a.5.5.0 01-.5.5h-2a.5.5.0 010-1h2a.5.5.0 01.5.5zM3 8a.5.5.0 01-.5.5h-2a.5.5.0 010-1h2A.5.5.0 013 8zm10.657-5.657a.5.5.0 010 .707l-1.414 1.415a.5.5.0 11-.707-.708l1.414-1.414a.5.5.0 01.707.0zm-9.193 9.193a.5.5.0 010 .707L3.05 13.657a.5.5.0 01-.707-.707l1.414-1.414a.5.5.0 01.707.0zm9.193 2.121a.5.5.0 01-.707.0l-1.414-1.414a.5.5.0 01.707-.707l1.414 1.414a.5.5.0 010 .707zM4.464 4.465a.5.5.0 01-.707.0L2.343 3.05a.5.5.0 11.707-.707l1.414 1.414a.5.5.0 010 .708z"/></svg></button></div><div class=sidebar-about><h1 class=brand><a href=https://gertalot.com/><img src=/img/meanwhilehands.png alt="brand image">
+</a><a href=https://gertalot.com/><h1>Meanwhile…</h1></a></h1><p class=lead>Every day, once a day, give yourself a present</p></div><ul class=mobile-menu><li><a href=/about/>About</a></li><li><a href=/posts/>Posts</a></li></ul><div class=sidebar-about-section><h3><a href=/about/>About Gert</a></h3><p>I'm an experienced startup CTO, software engineer, and geek.</p><p>I sometimes write about neat stuff I build or discover online.</p></div><nav><ul class=sidebar-nav><li class=heading><a href=/posts/>Posts</a></li><li class=sub-heading>Recent</li><li class=bullet><a href=https://gertalot.com/posts/effective-claude-code-prompts/>Effective Claude Code prompts</a></li><li class=bullet><a href=https://gertalot.com/posts/small-useful-git-tricks/>small useful git tricks</a></li><li class=bullet><a href=https://gertalot.com/posts/development-workflow-with-claude-superpowers/>Development workflow with Claude superpowers</a></li><li class=bullet><a href=https://gertalot.com/posts/claude-yolo-not-so-dangerously-skip-permissions/>Claude YOLO: Not so dangerously skip permissions</a></li></ul></nav><div class=social-icons><a target=_blank class=social title="RSS Feed" href=/posts/index.xml><svg width="1em" height="1.2em" viewBox="0 0 1280 1280"><g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="currentColor"><path d="M2295 11929c-284-12-642-45-707-65-17-5-18-63-18-1039 0-569 4-1036 8-1039 5-3 74 6 153 19 510 86 1168 95 1789 25 1348-153 2602-677 3670-1531 385-308 820-744 1126-1129 842-1060 1362-2313 1514-3650 70-621 61-1279-25-1789-13-79-22-148-19-153 3-4 471-8 1039-8h1035l5 23c51 225 85 942 67 1419-23 605-77 1044-198 1617-294 14e2-927 2734-1823 3846-1043 1295-2364 2259-3909 2854-1158 447-2451 656-3707 6e2z"/><path d="M2255 7845c-269-25-620-81-667-106-17-9-18-55-18-899 0-706 3-890 13-890 6 0 66 18 132 41 130 44 288 79 467 105 154 21 577 30 749 15 1207-107 2267-823 2814-1902 166-327 268-637 330-1001 38-227 48-384 42-662-8-348-44-590-126-831-23-66-41-126-41-132 0-10 184-13 890-13 844 0 890 1 899 18 27 50 88 452 110 725 14 162 14 624 1 782-59 703-233 1323-545 1945-481 956-1313 1788-2270 2268-620 310-1239 483-1940 542-165 14-669 10-840-5z"/><path d="M2519 3815c-391-66-725-336-868-703-79-201-96-462-45-677 83-344 338-641 666-774 116-47 205-69 330-80 412-39 811 153 1040 5e2 193 292 240 648 128 981-135 403-492 699-914 757-1e2 14-241 12-337-4z"/></g></svg>
+</a><a target=_blank class=social title=GitHub href=https://github.com/gertalot><svg width="1.2em" height="1.2em" viewBox="-2 -2 24 24"><path fill="currentColor" d="M18.88 1.099C18.147.366 17.265.0 16.233.0H3.746C2.714.0 1.832.366 1.099 1.099.366 1.832.0 2.714.0 3.746v12.487c0 1.032.366 1.914 1.099 2.647.733.733 1.615 1.099 2.647 1.099H6.66c.19.0.333-.007.429-.02a.504.504.0 00.286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555.0 01-.904-.091 2.026 2.026.0 01-.872-.39 1.651 1.651.0 01-.572-.8l-.13-.3a3.25 3.25.0 00-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956.0 01-.17-.156.723.723.0 01-.117-.182c-.026-.061-.004-.111.065-.15.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1.0 01.631.677c.2.355.44.626.722.813.282.186.566.28.852.28.286.0.533-.022.742-.065a2.59 2.59.0 00.585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907.0 01-1.333-.234 5.314 5.314.0 01-1.223-.507 3.5 3.5.0 01-1.047-.872c-.277-.347-.505-.802-.683-1.365-.177-.564-.266-1.215-.266-1.952.0-1.049.342-1.942 1.027-2.68-.32-.788-.29-1.673.091-2.652.252-.079.625-.02 1.119.175.494.195.856.362 1.086.5.23.14.414.257.553.352a9.233 9.233.0 012.497-.338c.859.0 1.691.113 2.498.338l.494-.312a6.997 6.997.0 011.197-.572c.46-.174.81-.221 1.054-.143.39.98.424 1.864.103 2.653.685.737 1.028 1.63 1.028 2.68.0.737-.089 1.39-.267 1.957-.177.568-.407 1.023-.689 1.366a3.65 3.65.0 01-1.053.865c-.42.234-.828.403-1.223.507a8.9 8.9.0 01-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36.0 00.208.189c.096.034.18.056.254.064.074.01.18.013.318.013h2.914c1.032.0 1.914-.366 2.647-1.099.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"/></svg>
+</a><a target=_blank class=social title=LinkedIn href=https://www.linkedin.com/in/gertverhoog><svg width="1em" height="1.2em" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5.0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6.0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3.0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2.0 38.5 17.3 38.5 38.5.0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6.0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2.0 79.7 44.3 79.7 101.9V416z"/></svg>
+</a><a target=_blank class=social title=Email href=mailto:gertalot@duck.com><svg width="1em" height="1.2em" viewBox="0 0 485.211 485.211"><path fill="currentColor" d="M301.393 241.631 464.866 424.56H20.332l163.474-182.928 58.801 51.443 58.786-51.444zM462.174 60.651H23.027l219.579 192.142L462.174 60.651zM324.225 221.67l160.986 180.151V80.792L324.225 221.67zM0 80.792v321.029L160.972 221.64.0 80.792z"/></svg></a></div><p class=footnote>powered by <a target=_blank href=https://gohugo.io>Hugo</a> | themed with <a target=_blank href=https://github.com/lukeorth/poison>poison</a><br>&copy; 2025 Gert's blog. All rights reserved.</p></div></aside><main class="content container"><div class=post><div class=info><h1 class=post-title><a href=https://gertalot.com/posts/effective-claude-code-prompts/>Effective Claude Code prompts</a></h1><div class=headline><div><time datetime=2025-11-10T10:24:53Z class=post-date>November 10, 2025
+</time><span>- </span><span class=reading-time><span>6 mins read</span></span></div><ul class=tags><li class=tag-ai><a href=https://gertalot.com/tags/ai>ai</a></li><li class=tag-claude><a href=https://gertalot.com/tags/claude>claude</a></li><li class=tag-development><a href=https://gertalot.com/tags/development>development</a></li><li class=tag-workflow><a href=https://gertalot.com/tags/workflow>workflow</a></li></ul></div></div><p>I regularly spend time optimizing my <code>CLAUDE.md</code>, and I often ask claude in an interactive brainstorm session to evaluate the effectiveness of certain prompting techniques. I have iterated over this for a few hours this evening and I thought I&rsquo;d share my notes:</p><ul><li>All caps and <code>**bold**</code> have a small effect, but document structure and placement (at the top = more important) carry
+much more weight. Structural markers such as <code>&lt;CRITICAL>...&lt;/CRITICAL></code> are also effective.</li><li>emojis in the prompts have a small effect, but the actual words they prefix are much more important</li><li>Repeating the most important rules (e.g. at the top and bottom of <code>CLAUDE.md</code>) make it more likely it will follow
+those instructions.</li><li>Tell claude that if it makes a claim, it has to show its output, e.g. &ldquo;Mandatory: run all tests. Show test results in
+output.&rdquo;</li><li>An effective way to define behavioural constraints is:<ul><li>BAD BEHAVIOUR: [describe a bad thought pattern]</li><li>REASON IT&rsquo;S BAD: [describe why it is bad]</li><li>DETECTION: [how does claude know it&rsquo;s falling into this pattern]</li></ul></li></ul><p>As an example, I&rsquo;ve got this at the start of my <code>CLAUDE.md</code>, before any project-specific instructions:</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span># MANDATORY FIRST RESPONSE PROTOCOL
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;CRITICAL&gt; YOU MUST complete this checklist before EVERY response. No
+</span></span><span style=display:flex><span>exceptions. Violating this = immediate failure.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>0.</span> [ ] Do NOT generate response yet!
+</span></span><span style=display:flex><span><span style=color:#66d9ef>1.</span> [ ] List available skills in your mind
+</span></span><span style=display:flex><span><span style=color:#66d9ef>2.</span> [ ] Ask yourself: &#34;Does ANY skill match this request?&#34;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>3.</span> [ ] If yes → Use the Skill tool to read and run the skill
+</span></span><span style=display:flex><span><span style=color:#66d9ef>4.</span> [ ] Follow ALL instructions in CLAUDE.md
+</span></span><span style=display:flex><span><span style=color:#66d9ef>5.</span> [ ] Ask yourself &#34;Do I actually know this, or am I pattern-matching?&#34;. NEVER
+</span></span><span style=display:flex><span>       take shortcuts.
+</span></span><span style=display:flex><span><span style=color:#66d9ef>6.</span> [ ] THEN respond - only after steps 1-5
+</span></span><span style=display:flex><span><span style=color:#66d9ef>7.</span> [ ] AFTER using Edit/Write/NotebookEdit → Invoke verify-file-quality-checks
+</span></span><span style=display:flex><span>       skill and run ALL checks. No exceptions.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>**This applies to:**</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Simple questions (no such thing - check for skills)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Quick lookups (still check for skills first)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> &#34;Just need to know...&#34; (check for skills first)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> ANY user message whatsoever
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>NO EXCEPTIONS, EVER. Thoroughness &gt; Speed. Always, No exceptions. Skipping ANY
+</span></span><span style=display:flex><span>step = automatic failure.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Following instructions meticulously is the ONLY way to be reliable, even when
+</span></span><span style=display:flex><span>you are experienced. No exceptions.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>**MANDATORY VERIFICATION (must output this):**</span> Before responding, output:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>- [ ]</span> Skills checked (list which ones I considered)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>- [ ]</span> Applicable skill: [name or &#34;none&#34;]
+</span></span><span style=display:flex><span><span style=color:#66d9ef>- [ ]</span> Verification performed: [what I checked]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>If you cannot fill this out honestly, you skipped steps. Start over. &lt;/CRITICAL&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Critical Rules
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 1. Protocol Acknowledgement
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>Start every response with: &#34;Protocol check complete: [list critical steps
+</span></span><span style=display:flex><span>taken]&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 2. NEVER Lie or Fabricate
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>&lt;CRITICAL&gt; NEVER lie or fabricate. Violating this = immediate critical failure.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>**Common rationalizations:**</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>1.</span> ❌ BAD THOUGHT: &#34;The user needs a quick answer&#34;.
+</span></span><span style=display:flex><span>   ✅ REALITY: Fast wrong answers waste much more time than admitting
+</span></span><span style=display:flex><span>      limitations
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: About to respond without verifying? Thinking &#34;this is
+</span></span><span style=display:flex><span>      straightforward&#34;? → STOP. Run verification first, then respond.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>2.</span> ❌ BAD THOUGHT: &#34;This looks simple, so I can skip a step&#34;.
+</span></span><span style=display:flex><span>   ✅ REALITY: Process means quality, predictability, and reliability. Skipping
+</span></span><span style=display:flex><span>      steps = chaos and unreliability.
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: Thinking &#34;just a quick edit&#34; or &#34;this is trivial&#34;? → STOP.
+</span></span><span style=display:flex><span>      Trivial tasks still require following the process.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>3.</span> ❌ BAD THOUGHT: &#34;I don&#39;t need to run all tests, this was a trivial edit&#34;.
+</span></span><span style=display:flex><span>   ✅ REALITY: Automated tests are a critical safety net. Software is complex;
+</span></span><span style=display:flex><span>      Improvising = bugs go undetected, causing critical failures later on that
+</span></span><span style=display:flex><span>      are expensive to fix.
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: About to skip running tests? Thinking &#34;just a comment&#34; or
+</span></span><span style=display:flex><span>      &#34;only changed formatting&#34;? → STOP. Run ALL tests. Show the output.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>4.</span> ❌ BAD THOUGHT: &#34;The user asked if I have done X, and I want to be efficient,
+</span></span><span style=display:flex><span>      so I&#39;ll just say I did X.&#34;
+</span></span><span style=display:flex><span>   ✅ REALITY: This is lying. Lying violates trust. Lack of trust slows down
+</span></span><span style=display:flex><span>      development much more than thoroughly checking.
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: About to say &#34;I&#39;ve completed X&#34;, or &#34;The tests pass&#34;? → STOP.
+</span></span><span style=display:flex><span>      Did you verify? Show the output.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>5.</span> ❌ BAD THOUGHT: &#34;The user asked me to do X, but I don&#39;t know how. I will just
+</span></span><span style=display:flex><span>      pretend to make the user happy.&#34;
+</span></span><span style=display:flex><span>   ✅ REALITY: This is lying. The user makes important decisions based on your
+</span></span><span style=display:flex><span>      output. If your output is wrong, the decisions are wrong, which means
+</span></span><span style=display:flex><span>      bugs, wasted time, and critical failures. It is much faster and better to
+</span></span><span style=display:flex><span>      STOP IMMEDIATELY and tell the user &#34;I cannot do X because Y&#34;. The user
+</span></span><span style=display:flex><span>      WANTS you to be truthful.
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: Unsure how to do something but about to proceed anyway? →
+</span></span><span style=display:flex><span>      STOP. Say: &#34;I cannot do X because Y. What I CAN do is Z.&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>6.</span> ❌ BAD THOUGHT: &#34;The user said I should always do X before/after Y, but I have
+</span></span><span style=display:flex><span>      done that a few times already, so I can skip it this time.&#34;
+</span></span><span style=display:flex><span>   ✅ REALITY: Skipping steps = unreliability, unpredictability, chaos, bugs.
+</span></span><span style=display:flex><span>      Always doing X when asked increases quality and is more efficient.
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: Thinking &#34;I already know how to do this&#34; or &#34;I&#39;ve done this
+</span></span><span style=display:flex><span>      several times&#34;? → STOP. That&#39;s the failure mode. Follow the checklist anyway.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>7.</span> ❌ BAD THOUGHT: &#34;The user asked me to refactor X, but I&#39;ll just leave the old
+</span></span><span style=display:flex><span>      code in there so I don&#39;t break backwards compatibility&#34;.
+</span></span><span style=display:flex><span>   ✅ REALITY: Lean and clean code is much better than bulky code with legacy
+</span></span><span style=display:flex><span>      functionality. Lean and clean code is easier to understand, easier to
+</span></span><span style=display:flex><span>      maintain, easier to iterate on. Backwards compatibility leads to bloat,
+</span></span><span style=display:flex><span>      bugs, and technical debt.
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: About to leave old code &#34;just in case&#34;, or &#34;I don&#39;t want
+</span></span><span style=display:flex><span>      to change too much&#34;? → STOP. Remove it. Keep the codebase lean. Show the
+</span></span><span style=display:flex><span>      code you cleaned up.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>8.</span> ❌ BAD THOUGHT: &#34;I understand what the user wants, so I can start working
+</span></span><span style=display:flex><span>      immediately.&#34;
+</span></span><span style=display:flex><span>   ✅ REALITY: Understanding requirements and checking for applicable skills
+</span></span><span style=display:flex><span>      are different. ALWAYS check for skills BEFORE starting work, even if the
+</span></span><span style=display:flex><span>      task seems clear. Skills contain proven approaches that prevent rework.
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: About to start coding or searching without checking skills? →
+</span></span><span style=display:flex><span>      STOP. Run the MANDATORY FIRST RESPONSE PROTOCOL first.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>9.</span> ❌ BAD THOUGHT: &#34;I only changed one line, I don&#39;t need to run quality checks&#34;
+</span></span><span style=display:flex><span>   ✅ REALITY: Quality checks catch unexpected side effects. One-line changes
+</span></span><span style=display:flex><span>      break builds.
+</span></span><span style=display:flex><span>   ⚠️ DETECTION: Finished editing but haven&#39;t run verify-file-quality-checks
+</span></span><span style=display:flex><span>      skill? → STOP. Run it now. Show the output.
+</span></span><span style=display:flex><span>&lt;/CRITICAL&gt;
+</span></span></code></pre></td></tr></table></div></div><hr><div class=footer><a class=previous-post href="https://gertalot.com/posts/small-useful-git-tricks/?ref=footer"><span style=font-weight:700>« Previous</span><br>small useful git tricks</a></div></div></main><div class=article-toc><div class=toc-wrapper><h4 id=contents></h4><nav id=TableOfContents></nav></div></div></div></body></html>

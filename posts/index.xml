@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Gert's blog</title><link>https://gertalot.com/posts/</link><description>Recent content in Posts on Gert's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 27 Oct 2025 04:43:05 +0000</lastBuildDate><atom:link href="https://gertalot.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>small useful git tricks</title><link>https://gertalot.com/posts/small-useful-git-tricks/</link><pubDate>Mon, 27 Oct 2025 04:43:05 +0000</pubDate><guid>https://gertalot.com/posts/small-useful-git-tricks/</guid><description>&lt;p&gt;Here&amp;rsquo;s a couple of &lt;code&gt;git&lt;/code&gt; aliases I use all the time. It gives you a quick and clear overview of your branches and
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Gert's blog</title><link>https://gertalot.com/posts/</link><description>Recent content in Posts on Gert's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 10 Nov 2025 10:24:53 +0000</lastBuildDate><atom:link href="https://gertalot.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Effective Claude Code prompts</title><link>https://gertalot.com/posts/effective-claude-code-prompts/</link><pubDate>Mon, 10 Nov 2025 10:24:53 +0000</pubDate><guid>https://gertalot.com/posts/effective-claude-code-prompts/</guid><description>&lt;p&gt;I regularly spend time optimizing my &lt;code&gt;CLAUDE.md&lt;/code&gt;, and I often ask claude in an interactive brainstorm session to evaluate the effectiveness of certain prompting techniques. I have iterated over this for a few hours this evening and I thought I&amp;rsquo;d share my notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;All caps and &lt;code&gt;**bold**&lt;/code&gt; have a small effect, but document structure and placement (at the top = more important) carry
+much more weight. Structural markers such as &lt;code&gt;&amp;lt;CRITICAL&amp;gt;...&amp;lt;/CRITICAL&amp;gt;&lt;/code&gt; are also effective.&lt;/li&gt;
+&lt;li&gt;emojis in the prompts have a small effect, but the actual words they prefix are much more important&lt;/li&gt;
+&lt;li&gt;Repeating the most important rules (e.g. at the top and bottom of &lt;code&gt;CLAUDE.md&lt;/code&gt;) make it more likely it will follow
+those instructions.&lt;/li&gt;
+&lt;li&gt;Tell claude that if it makes a claim, it has to show its output, e.g. &amp;ldquo;Mandatory: run all tests. Show test results in
+output.&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;An effective way to define behavioural constraints is:
+&lt;ul&gt;
+&lt;li&gt;BAD BEHAVIOUR: [describe a bad thought pattern]&lt;/li&gt;
+&lt;li&gt;REASON IT&amp;rsquo;S BAD: [describe why it is bad]&lt;/li&gt;
+&lt;li&gt;DETECTION: [how does claude know it&amp;rsquo;s falling into this pattern]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As an example, I&amp;rsquo;ve got this at the start of my &lt;code&gt;CLAUDE.md&lt;/code&gt;, before any project-specific instructions:&lt;/p&gt;</description></item><item><title>small useful git tricks</title><link>https://gertalot.com/posts/small-useful-git-tricks/</link><pubDate>Mon, 27 Oct 2025 04:43:05 +0000</pubDate><guid>https://gertalot.com/posts/small-useful-git-tricks/</guid><description>&lt;p&gt;Here&amp;rsquo;s a couple of &lt;code&gt;git&lt;/code&gt; aliases I use all the time. It gives you a quick and clear overview of your branches and
 commits. It can even watch for changes in realtime and show you any changes.&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://gertalot.com/posts/small-useful-git-tricks/git-log.jpg" alt="git log screenshot"&gt;&lt;/p&gt;
 &lt;h3 id="a-better-git-log"&gt;A better git log&lt;/h3&gt;

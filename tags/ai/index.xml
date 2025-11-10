@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on Gert's blog</title><link>https://gertalot.com/tags/ai/</link><description>Recent content in Ai on Gert's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 Oct 2025 04:23:12 +0000</lastBuildDate><atom:link href="https://gertalot.com/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Development workflow with Claude superpowers</title><link>https://gertalot.com/posts/development-workflow-with-claude-superpowers/</link><pubDate>Sun, 26 Oct 2025 04:23:12 +0000</pubDate><guid>https://gertalot.com/posts/development-workflow-with-claude-superpowers/</guid><description>&lt;p&gt;I have hardly written any code manually in the last year, yet I&amp;rsquo;ve built heaps of smaller and larger projects, using AI
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on Gert's blog</title><link>https://gertalot.com/tags/ai/</link><description>Recent content in Ai on Gert's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 10 Nov 2025 10:24:53 +0000</lastBuildDate><atom:link href="https://gertalot.com/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Effective Claude Code prompts</title><link>https://gertalot.com/posts/effective-claude-code-prompts/</link><pubDate>Mon, 10 Nov 2025 10:24:53 +0000</pubDate><guid>https://gertalot.com/posts/effective-claude-code-prompts/</guid><description>&lt;p&gt;I regularly spend time optimizing my &lt;code&gt;CLAUDE.md&lt;/code&gt;, and I often ask claude in an interactive brainstorm session to evaluate the effectiveness of certain prompting techniques. I have iterated over this for a few hours this evening and I thought I&amp;rsquo;d share my notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;All caps and &lt;code&gt;**bold**&lt;/code&gt; have a small effect, but document structure and placement (at the top = more important) carry
+much more weight. Structural markers such as &lt;code&gt;&amp;lt;CRITICAL&amp;gt;...&amp;lt;/CRITICAL&amp;gt;&lt;/code&gt; are also effective.&lt;/li&gt;
+&lt;li&gt;emojis in the prompts have a small effect, but the actual words they prefix are much more important&lt;/li&gt;
+&lt;li&gt;Repeating the most important rules (e.g. at the top and bottom of &lt;code&gt;CLAUDE.md&lt;/code&gt;) make it more likely it will follow
+those instructions.&lt;/li&gt;
+&lt;li&gt;Tell claude that if it makes a claim, it has to show its output, e.g. &amp;ldquo;Mandatory: run all tests. Show test results in
+output.&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;An effective way to define behavioural constraints is:
+&lt;ul&gt;
+&lt;li&gt;BAD BEHAVIOUR: [describe a bad thought pattern]&lt;/li&gt;
+&lt;li&gt;REASON IT&amp;rsquo;S BAD: [describe why it is bad]&lt;/li&gt;
+&lt;li&gt;DETECTION: [how does claude know it&amp;rsquo;s falling into this pattern]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As an example, I&amp;rsquo;ve got this at the start of my &lt;code&gt;CLAUDE.md&lt;/code&gt;, before any project-specific instructions:&lt;/p&gt;</description></item><item><title>Development workflow with Claude superpowers</title><link>https://gertalot.com/posts/development-workflow-with-claude-superpowers/</link><pubDate>Sun, 26 Oct 2025 04:23:12 +0000</pubDate><guid>https://gertalot.com/posts/development-workflow-with-claude-superpowers/</guid><description>&lt;p&gt;I have hardly written any code manually in the last year, yet I&amp;rsquo;ve built heaps of smaller and larger projects, using AI
 to learn new things, write boilerplate code, resolve tricky bugs, and rapidly iterate on ideas.&lt;/p&gt;
 &lt;p&gt;I have journeyed from &lt;em&gt;AI autocomplete&lt;/em&gt; to &lt;em&gt;vibe coding&lt;/em&gt; to &lt;em&gt;prompt engineering&lt;/em&gt; to increasingly effective agentic
 &lt;em&gt;spec-driven&lt;/em&gt; development workflows. For a while, I&amp;rsquo;ve been using and developing my trusty old prompts

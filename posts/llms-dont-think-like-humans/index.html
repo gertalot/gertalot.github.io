@@ -9,40 +9,40 @@
 I&rsquo;ve thought about that a lot (over the past decades, given my degree in AI from many years ago), and it&rsquo;s a really
 interesting question: What actually separates human cognition from LLMs? Is there a fundamental difference between human
 and machine intelligence?</p><p>I think that there are, at least currently, a number of big differences between the way we think and the way LLMs think.</p><p>First, our brains are vastly more complex than current LLMs. The human brain has around 86 billion neurons, with about
-<a href=https://pmc.ncbi.nlm.nih.gov/articles/PMC10630093/ target=_blank>150 million synapses per cubic millimeter</a> of cortex. GPT-4 has
-roughly a trillion parameters across maybe 11 million nodes, making the brain something like <a href=https://www.beren.io/2022-08-06-The-scale-of-the-brain-vs-machine-learning/ target=_blank>8000 times more
-complex</a> by node count. And synapses are
+150 million synapses per cubic millimeter of cortex. GPT-4 has
+roughly a trillion parameters across maybe 11 million nodes, making the brain vastly more complex. And synapses are
 dynamic bio-electrochemical structures that change based on activity and experience, rather than static weights. The
 brain does all of this on about 20 watts, while training LLMs requires orders of magnitude more energy.</p><p>Another aspect is embodiment: our words and sensory experiences are intricately linked. When I say &ldquo;coffee,&rdquo; that word
 connects to the smell of it, the warmth of the cup, the ritual of making it, memories of having enjoyed (or not) coffee
-in the past, and so on. Words have a qualitative aspect tied to things we&rsquo;ve felt, smelled, seen, and heard.</p><p><a href=https://pmc.ncbi.nlm.nih.gov/articles/PMC3156979/ target=_blank>Embodied cognition research</a> shows that sensorimotor brain regions
-activate during language processing. The same neural structures fire when you read about an action as when you perform
-it. Language appears to be <a href=https://royalsocietypublishing.org/doi/10.1098/rstb.2023.0144 target=_blank>grounded in perception and action</a>.</p><p>Similarly, some words activate <a href=https://pmc.ncbi.nlm.nih.gov/articles/PMC5390741/ target=_blank>limbic regions, prefrontal areas, and sensorimotor
-cortex</a>. Words aren&rsquo;t neutral symbols to us: they carry emotional
-weight.</p><p>We also have an astounding ability to simulate scenarios in our minds: One can imagine a conversation that hasn&rsquo;t
-happened yet and predict not just one&rsquo;s own mental states and responses, but also the others&rsquo;. Cognitive scientists
-call this <a href=https://plato.stanford.edu/entries/folkpsych-simulation/ target=_blank>Simulation Theory</a>: We understand others by
-mentally simulating being them. When you observe someone acting, the same premotor cortex areas activate that would
-control that action in yourself. We&rsquo;re running internal models of other people constantly.</p><p>Our words and language use are connected to goals, desires, and fears. &ldquo;I don&rsquo;t want to be hungry.&rdquo; &ldquo;I don&rsquo;t want to
+in the past, and so on. Words have a qualitative aspect tied to things we&rsquo;ve felt, smelled, seen, and heard.</p><p><a href=https://plato.stanford.edu/entries/embodied-cognition/ target=_blank>Embodied cognition</a> research shows that sensorimotor brain
+regions activate during language processing. The same neural structures fire when you read about an action as when you
+perform it. Language appears to be <a href=https://royalsocietypublishing.org/doi/10.1098/rstb.2023.0144 target=_blank>grounded in perception and
+action</a>.</p><p>We also have an astounding ability to simulate scenarios in our minds: One can imagine a conversation that hasn&rsquo;t
+happened yet and predict not just one&rsquo;s own mental states and responses, but also the others&rsquo;. Cognitive scientists call
+this <a href=https://plato.stanford.edu/entries/folkpsych-simulation/ target=_blank>Simulation Theory</a>: We understand others by mentally
+simulating being them. When you observe someone acting, the same premotor cortex areas activate that would control that
+action in yourself. We&rsquo;re running internal models of other people constantly.</p><p>Our words and language use are connected to goals, desires, and fears. &ldquo;I don&rsquo;t want to be hungry.&rdquo; &ldquo;I don&rsquo;t want to
 feel abandoned.&rdquo; &ldquo;I want to be appreciated.&rdquo; &ldquo;I don&rsquo;t want to be broke, so I need to keep my job.&rdquo; These motivations are
 woven through everything we think and say. I think this is where <em>intentionality</em> comes from: our desires for survival,
 comfort, safety, and social connection create a directedness to our mental states. Whether this produces genuine &ldquo;free
 will&rdquo; or just the experience of it is something <a href=https://plato.stanford.edu/entries/functionalism/ target=_blank>philosophers argue
-about</a>, but either way, it fundamentally shapes how we use language.</p><p>LLMs don&rsquo;t have any of this. They don&rsquo;t have sensorimotor experiences or emotional states. They don&rsquo;t have survival needs or social anxieties or the fear of being hungry. They don&rsquo;t navigate a physical world.</p><p>The <a href=https://royalsocietypublishing.org/doi/10.1098/rsta.2022.0041 target=_blank>symbol grounding problem</a> (how symbols connect to
-the world) is an active area of research. Some researchers argue that RLHF fine-tuning might establish some form of
+about</a>, but either way, it fundamentally shapes how we use language.</p><p>LLMs don&rsquo;t have any of this. They don&rsquo;t have sensorimotor experiences or emotional states. They don&rsquo;t have survival
+needs or social anxieties or the fear of being hungry. They don&rsquo;t navigate a physical world. The high-dimensional vector
+spaces encode meaning and knowledge in LLMs, but the vectors themselves are not connected to the world.</p><p>The <a href=https://royalsocietypublishing.org/doi/10.1098/rsta.2022.0041 target=_blank>symbol grounding problem</a> (how symbols connect to
+the world) is an active area of research. Some researchers argue that <a href=https://www.assemblyai.com/blog/how-rlhf-preference-model-tuning-works-and-how-things-may-go-wrong target=_blank>RLHF fine-tuning</a> might establish some form of
 &ldquo;world-involving functions,&rdquo; and there&rsquo;s <a href=https://arxiv.org/html/2304.01481v2 target=_blank>interesting work</a> on whether grounding
 strictly requires embodiment. Recent benchmarks even show LLMs performing <a href=https://arxiv.org/html/2506.07896v1 target=_blank>surprisingly well on grounding
 tasks</a>. But the current consensus is that LLMs lack the sensorimotor grounding that
 underlies human language understanding.</p><p>I don&rsquo;t think there&rsquo;s a fundamental difference between biological and silicon computers, a position called
-<a href=https://plato.stanford.edu/entries/functionalism/ target=_blank>functionalism</a>, which I learned about a long time ago reading
-Hofstadter&rsquo;s Gödel, Escher, Bach as a high school kid. Functionalism is a mainstream view in the field of Philosophy of
-Mind. Although there are <a href=https://www.cambridge.org/core/journals/philosophy-of-science/article/energy-requirements-undermine-substrate-independence-and-mindbody-functionalism/2BB3C2353EFF80F9D5805CDCEA8C3C89 target=_blank>serious
-critiques</a>,
-including Searle&rsquo;s famous Chinese Room argument and questions about whether thinking is more substrate-dependent than
-functionalists assume. Functionalism says that mental states are defined by what they do (their functional role), not
-what they&rsquo;re made of (the substrate), so the idea is that the <em>computation</em> matters, not whether this happens in organic
-matter or silicon. However, one critique of this idea is that computation requires energy, and energy requirements
-depend on the substrate, so you can&rsquo;t just assume that any substrate can implement the same <em>functionality</em> at any
-scale. It could be that biological brains have unique properties that don&rsquo;t transfer to silicon brains.</p><p>My hunch is that until AI systems are embodied, i.e. until they need to navigate the world, survive in it, have
+<a href=https://plato.stanford.edu/entries/functionalism/ target=_blank>functionalism</a> (which I learned about a long time ago breathlessly
+reading Hofstadter&rsquo;s Gödel, Escher, Bach as a high school kid). Functionalism is a mainstream view in the field of
+Philosophy of Mind. Although there are serious critiques, including Searle&rsquo;s famous Chinese Room argument and questions
+about whether thinking is more substrate-dependent than functionalists assume: Functionalism says that mental states are
+defined by what they do (their functional role), not what they&rsquo;re made of (the substrate), so the idea is that the
+<em>computation</em> matters, not whether this happens in organic matter or silicon. However, <a href=https://www.cambridge.org/core/journals/philosophy-of-science/article/energy-requirements-undermine-substrate-independence-and-mindbody-functionalism/2BB3C2353EFF80F9D5805CDCEA8C3C89 target=_blank>one critique of this
+idea</a>
+is that computation requires energy, and energy requirements depend on the substrate, so you can&rsquo;t just assume that any
+substrate can implement the same <em>functionality</em> at any scale. It could be that biological brains have unique properties
+that don&rsquo;t transfer to silicon brains.</p><p>My hunch is that until AI systems are embodied, i.e. until they need to navigate the world, survive in it, have
 something at stake, they won&rsquo;t develop the kind of thinking we have, let alone that LLM architectures are very different
 from our brains&rsquo; structure.</p><hr><div class=footer><a class=previous-post href="https://gertalot.com/posts/effective-claude-code-prompts/?ref=footer"><span style=font-weight:700>« Previous</span><br>Effective Claude Code prompts</a></div></div></main><div class=article-toc><div class=toc-wrapper><h4 id=contents></h4><nav id=TableOfContents></nav></div></div></div></body></html>

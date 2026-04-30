@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Connect Four</title>
+<style>
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: #111;
+  }
+  h1 { margin: 0; font-weight: 600; }
+  #status { font-size: 1.5rem; font-weight: 600; min-height: 1.5em; }
+  #board {
+    background: #1d4ed8;
+    padding: 8px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: repeat(7, 64px);
+    grid-template-rows: repeat(6, 64px);
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .cell {
+    background: #ffffff;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    transition: background-color 150ms ease;
+  }
+  .cell.red    { background: #dc2626; }
+  .cell.yellow { background: #facc15; }
+  .cell.win {
+    outline: 4px solid #ffffff;
+    outline-offset: -4px;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.5);
+  }
+  button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #1d4ed8;
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button:hover { background: #1e40af; }
+</style>
+</head>
+<body>
+  <h1>Connect Four</h1>
+  <div id="status"></div>
+  <div id="board"></div>
+  <button id="new-game">New Game</button>
+<script>
+class Game {
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
+    this.board = Array.from({ length: 6 }, () => Array(7).fill(null));
+    this.currentPlayer = 'red';
+    this.gameOver = false;
+    this.winner = null;
+    this.winningCells = [];
+  }
+
+  isBoardFull() {
+    return this.board[5].every(cell => cell !== null);
+  }
+
+  // Lowest empty row in `col`, or -1 if the column is full.
+  _dropRow(board, col) {
+    for (let r = 0; r < 6; r++) {
+      if (board[r][col] === null) return r;
+    }
+    return -1;
+  }
+
+  checkWin(row, col) {
+    const directions = [
+      [0, 1],   // horizontal
+      [1, 0],   // vertical
+      [1, 1],   // diagonal /
+      [1, -1],  // diagonal \
+    ];
+    const player = this.board[row][col];
+    for (const [dr, dc] of directions) {
+      // Each offset in [-3, 0] yields a 4-cell window containing (row, col).
+      for (let offset = -3; offset <= 0; offset++) {
+        const cells = [];
+        let ok = true;
+        for (let i = 0; i < 4; i++) {
+          const r = row + dr * (offset + i);
+          const c = col + dc * (offset + i);
+          if (r < 0 || r >= 6 || c < 0 || c >= 7) { ok = false; break; }
+          if (this.board[r][c] !== player) { ok = false; break; }
+          cells.push([r, c]);
+        }
+        if (ok) return cells;
+      }
+    }
+    return null;
+  }
+
+  dropDisc(col) {
+    if (this.gameOver) return null;
+    if (col < 0 || col >= 7) return null;
+    const row = this._dropRow(this.board, col);
+    if (row === -1) return null;
+    this.board[row][col] = this.currentPlayer;
+
+    const winning = this.checkWin(row, col);
+    if (winning) {
+      this.winner = this.currentPlayer;
+      this.winningCells = winning;
+      this.gameOver = true;
+    } else if (this.isBoardFull()) {
+      this.winner = 'draw';
+      this.gameOver = true;
+    } else {
+      this.currentPlayer = this.currentPlayer === 'red' ? 'yellow' : 'red';
+    }
+    return [row, col];
+  }
+
+  aiMove() {
+    const movesPlayed = this.board.flat().filter(c => c !== null).length;
+    const result = this._minimax(
+      this.board, 4, true, -Infinity, Infinity, movesPlayed
+    );
+    if (result.col === null) return null;
+    return this.dropDisc(result.col);
+  }
+
+  _minimax(board, depth, isMaximising, alpha, beta, movesPlayed) {
+    const colOrder = [3, 2, 4, 1, 5, 0, 6];     // centre-out for pruning
+    const player   = isMaximising ? 'yellow' : 'red';
+
+    const legalCols = colOrder.filter(c => board[5][c] === null);
+    if (legalCols.length === 0) return { score: 0, col: null };
+
+    let bestScore = isMaximising ? -Infinity : Infinity;
+    let bestCol   = legalCols[0];
+
+    for (const col of legalCols) {
+      const row = this._dropRow(board, col);
+      board[row][col] = player;
+
+      let score;
+      if (this._checkBoardWin(board, row, col)) {
+        score = isMaximising
+          ?  1_000_000 - (movesPlayed + 1)
+          : -1_000_000 + (movesPlayed + 1);
+      } else if (depth - 1 === 0) {
+        score = this._evaluate(board);
+      } else {
+        const sub = this._minimax(
+          board, depth - 1, !isMaximising, alpha, beta, movesPlayed + 1
+        );
+        score = sub.score;
+      }
+
+      board[row][col] = null;
+
+      if (isMaximising) {
+        if (score > bestScore) { bestScore = score; bestCol = col; }
+        alpha = Math.max(alpha, score);
+      } else {
+        if (score < bestScore) { bestScore = score; bestCol = col; }
+        beta = Math.min(beta, score);
+      }
+      if (beta <= alpha) break;
+    }
+
+    return { score: bestScore, col: bestCol };
+  }
+
+  _checkBoardWin(board, row, col) {
+    const directions = [[0, 1], [1, 0], [1, 1], [1, -1]];
+    const player = board[row][col];
+    for (const [dr, dc] of directions) {
+      for (let offset = -3; offset <= 0; offset++) {
+        let ok = true;
+        for (let i = 0; i < 4; i++) {
+          const r = row + dr * (offset + i);
+          const c = col + dc * (offset + i);
+          if (r < 0 || r >= 6 || c < 0 || c >= 7) { ok = false; break; }
+          if (board[r][c] !== player) { ok = false; break; }
+        }
+        if (ok) return true;
+      }
+    }
+    return false;
+  }
+
+  _evaluate(board) {
+    let score = 0;
+
+    // Centre-column bonus: intentionally additive to the window scoring below.
+    // Windows through col 3 already credit lines that pass through the centre;
+    // this extra +/-3 per centre disc rewards centre control beyond line potential.
+    for (let r = 0; r < 6; r++) {
+      if      (board[r][3] === 'yellow') score += 3;
+      else if (board[r][3] === 'red')    score -= 3;
+    }
+
+    const directions = [[0, 1], [1, 0], [1, 1], [1, -1]];
+    for (let r = 0; r < 6; r++) {
+      for (let c = 0; c < 7; c++) {
+        for (const [dr, dc] of directions) {
+          let yCount = 0, rCount = 0, eCount = 0;
+          let valid = true;
+          for (let i = 0; i < 4; i++) {
+            const nr = r + dr * i;
+            const nc = c + dc * i;
+            if (nr < 0 || nr >= 6 || nc < 0 || nc >= 7) { valid = false; break; }
+            const v = board[nr][nc];
+            if (v === 'yellow') yCount++;
+            else if (v === 'red') rCount++;
+            else eCount++;
+          }
+          if (!valid) continue;
+
+          if      (yCount === 3 && eCount === 1) score += 5;
+          else if (yCount === 2 && eCount === 2) score += 2;
+          if      (rCount === 3 && eCount === 1) score -= 5;
+          else if (rCount === 2 && eCount === 2) score -= 2;
+        }
+      }
+    }
+    return score;
+  }
+}
+
+function buildCells() {
+  const boardEl = document.getElementById('board');
+  const cells = Array.from({ length: 6 }, () => new Array(7));
+  for (let r = 5; r >= 0; r--) {
+    for (let c = 0; c < 7; c++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.dataset.col = c;
+      cells[r][c] = cell;
+      boardEl.appendChild(cell);
+    }
+  }
+  return cells;
+}
+
+function render(game) {
+  for (let r = 0; r < 6; r++) {
+    for (let c = 0; c < 7; c++) {
+      const cell = cells[r][c];
+      cell.classList.remove('red', 'yellow', 'win');
+      const v = game.board[r][c];
+      if (v === 'red') cell.classList.add('red');
+      else if (v === 'yellow') cell.classList.add('yellow');
+    }
+  }
+  for (const [r, c] of game.winningCells) {
+    cells[r][c].classList.add('win');
+  }
+  const status = document.getElementById('status');
+  if (game.winner === 'red')         status.textContent = 'Red wins!';
+  else if (game.winner === 'yellow') status.textContent = 'Yellow wins!';
+  else if (game.winner === 'draw')   status.textContent = 'Draw';
+  else status.textContent =
+    game.currentPlayer === 'red' ? 'Your turn' : "AI's turn";
+}
+
+function attachHandlers(game) {
+  document.getElementById('board').addEventListener('click', (e) => {
+    const cell = e.target.closest('.cell');
+    if (!cell) return;
+    const col = parseInt(cell.dataset.col, 10);
+    const placed = game.dropDisc(col);
+    if (placed === null) return;
+    render(game);
+    if (!game.gameOver) {
+      game.aiMove();
+      render(game);
+    }
+  });
+  document.getElementById('new-game').addEventListener('click', () => {
+    game.reset();
+    render(game);
+  });
+}
+
+const cells = buildCells();
+const game = new Game();
+render(game);
+attachHandlers(game);
+</script>
+</body>
+</html>

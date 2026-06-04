@@ -1,0 +1,11 @@
+import{_ as p}from"./slidev/VClick-DYpFs2KI.js";import{_ as c}from"./slidev/CodeBlockWrapper.vue_vue_type_script_setup_true_lang-P0ccKYaK.js";import{o as m,b as f,w as l,g as s,C as n,d as a,m as d,v as k,x as _,z as t}from"./modules/vue-wxjcqmP6.js";import{I as g}from"./slidev/default-BKA_EEiC.js";import{u as x,f as v}from"./slidev/context-D6oY6_bR.js";import"./index-D0ssZBJg.js";import"./modules/shiki-B-YRJDqp.js";import"./modules/unplugin-icons-BQzVvKBI.js";const N={__name:"slides.md__slidev_16",setup(h){const{$clicksContext:o,$frontmatter:i}=x();return o.setup(),(w,e)=>{const u=c,r=p;return m(),f(g,k(_(t(v)(t(i),15))),{default:l(()=>[e[1]||(e[1]=s("h1",null,"/flow:review & fix",-1)),e[2]||(e[2]=s("p",null,"Runs autonomously.",-1)),e[3]||(e[3]=s("ul",null,[s("li",null,"Run several review agents in parallel"),s("li",null,[n("Assess each issue as "),s("em",null,"won’t fix"),n(", "),s("em",null,"auto-fix"),n(", or "),s("em",null,"needs-input")]),s("li",null,[n("Use TDD and fix all the "),s("em",null,"auto-fix"),n(" items")])],-1)),a(r,null,{default:l(()=>[a(u,d({},{ranges:[]}),{default:l(()=>[...e[0]||(e[0]=[s("pre",{class:"shiki shiki-themes vitesse-dark vitesse-light slidev-code",style:{"--shiki-dark":"#dbd7caee","--shiki-light":"#393a34","--shiki-dark-bg":"#121212","--shiki-light-bg":"#ffffff"}},[s("code",{class:"language-txt"},[s("span",{class:"line"},[s("span",null,"⏺ 5 agents finished (ctrl+o to expand)")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   ├ Security differential review · 4 tool uses · 27.3k tokens")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   │ ⎿  Done")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   ├ Quality refactor review · 3 tool uses · 26.7k tokens")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   │ ⎿  Done")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   ├ Plan completeness check · 3 tool uses · 15.3k tokens")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   │ ⎿  Done")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   ├ Intent vs docs check · 2 tool uses · 15.3k tokens")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   │ ⎿  Done")]),n(`
+`),s("span",{class:"line"},[s("span",null,"   └ Test quality audit · 3 tool uses · 22.7k tokens")]),n(`
+`),s("span",{class:"line"},[s("span",null,"     ⎿  Done")])])],-1)])]),_:1},16)]),_:1})]),_:1},16)}}};export{N as default};

@@ -1,0 +1,8 @@
+import{_ as r}from"./slidev/CodeBlockWrapper.vue_vue_type_script_setup_true_lang-P0ccKYaK.js";import{o as p,b as c,w as n,g as s,d as m,m as d,C as e,v as f,x as u,z as t}from"./modules/vue-wxjcqmP6.js";import{I as k}from"./slidev/default-BKA_EEiC.js";import{u as h,f as g}from"./slidev/context-D6oY6_bR.js";import"./modules/unplugin-icons-BQzVvKBI.js";import"./index-D0ssZBJg.js";import"./modules/shiki-B-YRJDqp.js";const I={__name:"slides.md__slidev_15",setup(_){const{$clicksContext:l,$frontmatter:i}=h();return l.setup(),(v,a)=>{const o=r;return p(),c(k,f(u(t(g)(t(i),14))),{default:n(()=>[a[1]||(a[1]=s("h1",null,"/flow:implement (continued)",-1)),m(o,d({},{ranges:[]}),{default:n(()=>[...a[0]||(a[0]=[s("pre",{class:"shiki shiki-themes vitesse-dark vitesse-light slidev-code",style:{"--shiki-dark":"#dbd7caee","--shiki-light":"#393a34","--shiki-dark-bg":"#121212","--shiki-light-bg":"#ffffff"}},[s("code",{class:"language-txt"},[s("span",{class:"line"},[s("span",null,"⏺ All 7 tasks done. Per /flow:implement override:")]),e(`
+`),s("span",{class:"line"},[s("span",null,"  1. Confirm test suite passes.")]),e(`
+`),s("span",{class:"line"},[s("span",null,"  2. Invoke flow:review.")]),e(`
+`),s("span",{class:"line"},[s("span")]),e(`
+`),s("span",{class:"line"},[s("span",null,"  Note: Task 7 was manual-verification only — I walked the spec §7 checklist against the code by inspection,")]),e(`
+`),s("span",{class:"line"},[s("span",null,"  all 5 checks pass logically, no fix needed → no commit (plan permits this).")]),e(`
+`),s("span",{class:"line"},[s("span")]),e(`
+`),s("span",{class:"line"},[s("span",null,"  Running the project test suite.")])])],-1)])]),_:1},16)]),_:1},16)}}};export{I as default};
